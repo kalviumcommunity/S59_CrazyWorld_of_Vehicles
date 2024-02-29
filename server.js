@@ -1,10 +1,22 @@
-var express= require('express');
-var app = express();
-const port = 8080;
+const express = require('express')
+let app = express();
+const {connectDB, checkConnected}=require('./db.js')
 
-app.get('/', (req, res)=>{
-    res.send('Express and nodemon');
+connectDB()
+
+app.get("/",(req,res)=>{
+    if(checkConnected()){
+        res.send("Data base connection successful!!")
+    }
+    else{
+        res.send("Connection Failed")
+    }
 });
-app.listen(port, ()=>{
-    console.log(`App is running on port ${port}`)
+
+let port = 8080;
+
+app.listen(port,()=>{
+    console.log(`we are at port ${port}`)
 })
+
+module.exports= {app}
