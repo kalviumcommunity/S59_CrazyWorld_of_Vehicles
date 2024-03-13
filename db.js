@@ -11,7 +11,6 @@ const connectDB = async()=>{
     }
 }
 
-
 const disconnectDB = async()=>{
     mongoose.disconnect()
     console.log("MoongoDB Disconnected")
