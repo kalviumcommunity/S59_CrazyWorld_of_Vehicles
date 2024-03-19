@@ -1,17 +1,18 @@
 import React from 'react'
 
+
 export default function Navbar() {
   return (
     <>
-    <nav className="flex justify-between p-2 max-w-full h-[7vh] shadow-xl backdrop-grayscale bg-blue-400">
-      <div className="flex w-[20vw]">
-      <select className='mr-3'>
-      <option value="vehicles">Vehicles</option>
-      <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-      </select>
-      <button>Wierdies</button>
+    <nav className="flex justify-between p-2 max-w-full h-[7vh] shadow-xl backdrop-grayscale bg-blue-400 text-xl">
+      <div className="flex w-[10vw] items-center justify-between">
+  {/* <div className="flex items-center justify-between cursor-pointer"> */}
+    <button className="text-gray-700">Countries</button>  
+  {/* <ul className="absolute bg-white border border-gray-200 rounded-md shadow-md mt-1 px-2 py-1 w-48 right-0 invisible opacity-0 transition duration-300 ease-in-out">
+    <li className="text-gray-700">Country</li>
+    <li className="text-gray-700">Brand</li>
+  </ul> */}
+  <button className="text-gray-700">Wierdies</button>
       </div> 
       <div className="flex items-center">CrazyWorld of Vehicles</div>
       <div className="flex flex-row justify-evenly items-center">
