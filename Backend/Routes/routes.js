@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const { connectDB } = require('./db.js')
-const Country = require('./schema.js')
+const { connectDB } = require('../db.js')
+const Country = require('../Schemas/schema.js')
 
 router.get('/', async (req, res) => {
     try {
