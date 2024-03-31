@@ -51,7 +51,7 @@ function Page() {
                 src={wierdy.ImgURL}
                 alt={wierdy.Name}
               />
-              <p className="text-2xl text-black mt-[60vh] absolute w-[15vw]">{wierdy.Name}</p>
+              <p className="text-2xl text-black mt-[62vh] absolute w-[15vw]">{wierdy.Name}</p>
             </div>
           ))}
         </div>
