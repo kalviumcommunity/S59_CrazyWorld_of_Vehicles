@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const brandSchema = new mongoose.Schema({
     Country:{
         type: String,
-        // required : true
+        required : true
     },
     Brand_1:{
         type: String,
-        // required : true
+        required : true
     },
     Brand_2:{
         type: String,

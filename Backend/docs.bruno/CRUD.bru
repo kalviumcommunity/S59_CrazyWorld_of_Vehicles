@@ -4,8 +4,17 @@ meta {
   seq: 2
 }
 
-get {
-  url: http://localhost:8081/api
+post {
+  url: http://localhost:8081/api/add-weirdy
   body: json
   auth: none
+}
+
+body:json {
+  {
+  "ImgURL": "https://www.usnews.com/object/image/00000182-a546-dc41-a1db-a56f5f460000/16-Paul_Arzens_Oeuf_-_WIKIMEDIA_Cropped.jpg?update-time=&size=responsive640",
+    "Name": "L’Oeuf Electrique",
+    "Category": "Car",
+    "Details":"The L'Oeuf Electrique (“the electric egg”) Concept Car was created by industrial designer Paul Arzens, and only one was made.Arzens, who designed railway locomotives and cars, built an electric vehicle partially because of a gasoline shortage during World War II. The three-wheeled vehicle has an electric motor and battery pack, with 63 miles to a battery charge and a top speed of 44 mph."
+  }
 }
