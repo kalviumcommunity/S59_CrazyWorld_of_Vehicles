@@ -24,7 +24,7 @@ function Page() {
       setCurrentIndex((prevIndex) =>
         prevIndex === data.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Adjust sliding interval as needed
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [data]);
