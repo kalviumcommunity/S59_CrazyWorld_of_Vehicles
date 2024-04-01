@@ -5,7 +5,7 @@ function Page() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const fetchData = () => {
-    fetch("http://localhost:8081/api")
+    fetch("https://s59-crazyworld-of-vehicles-1.onrender.com/api")
       .then((res) => res.json())
       .then((result) => {
         setData(result);

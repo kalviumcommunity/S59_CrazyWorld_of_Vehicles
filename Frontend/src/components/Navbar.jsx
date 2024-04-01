@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
+import Weirdies from './Weirdies' 
 
 export default function Navbar() {
   return (
@@ -12,11 +13,15 @@ export default function Navbar() {
     <li className="text-gray-700">Country</li>
     <li className="text-gray-700">Brand</li>
   </ul> */}
-  <button className="text-gray-700">Wierdies</button>
+  <Link to="/Weirdies">
+  <button className="text-gray-700 ml-3">Wierdies</button>
+  </Link>
       </div> 
       <div className="flex items-center">CrazyWorld of Vehicles</div>
       <div className="flex flex-row justify-evenly items-center">
+        <Link to="/">
       <div className='mr-3 cursor-pointer'>Home</div>
+      </Link>
       <div className='mr-3 cursor-pointer'>About us</div>
       <div className="cursor-pointer">Login</div>
       </div> 
