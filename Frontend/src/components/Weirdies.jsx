@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 export default function Wierdies() {
   const [data, setData] = useState([]);
@@ -18,10 +17,10 @@ export default function Wierdies() {
 
   useEffect(() => {
     fetchData();
-  }, [data]);
+  }, []); 
 
   return (
-    <>    
+    <>
     <div className="flex justify-center">
       <div className="flex justify-between ml-[30vw] mt-[4vh]">
         <h1 className="text-5xl">Wierd and Funny Vehicles</h1>
@@ -41,8 +40,6 @@ export default function Wierdies() {
         </div>
       ))}
       </div>
-    
-  </>
-
+    </>
   );
 }
