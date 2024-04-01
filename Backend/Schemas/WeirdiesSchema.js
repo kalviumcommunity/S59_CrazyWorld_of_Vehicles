@@ -15,7 +15,7 @@ const weirdy = new mongoose.Schema({
     },
     Details: {
         type: String,
-        // required: true
+        required: false
     }
 })
 
