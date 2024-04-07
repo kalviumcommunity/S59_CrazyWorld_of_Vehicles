@@ -31,14 +31,13 @@ router.patch('/:id', async (req, res) => {
             return res.status(404).json({ error: "Weirdy not found" })
         }
         res.json(foundWeirdy)
-
     }
     catch (err) {
         res.status(500).send('Error: ' + err);
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/update-vehicle/:id', async (req, res) => {
     try {
         const foundWeirdy = await Weirdy.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!foundWeirdy) {
