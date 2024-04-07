@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/Weirdies" element={<Weirdies />} />
         <Route path="/AddVehicle" element={<AddVehicle />} />
+        <Route path="/editVehicle" element={<editVehicle />} />
 
       </Routes>
     </>

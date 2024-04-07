@@ -24,7 +24,7 @@ export default function AddVehicle() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch("http://localhost:8081/api/add-weirdy", {
+      const response = await fetch("https://s59-crazyworld-of-vehicles-1.onrender.com/api/add-weirdy", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
