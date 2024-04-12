@@ -1,7 +1,25 @@
 const express = require('express')
 const router = express.Router();
 const { connectDB } = require('../db.js')
+const Joi = require('joi')
 const Weirdy = require('../Schemas/WeirdiesSchema.js')
+
+const userSchema = Joi.object({
+    Name: Joi.string().required(),
+    ImgURL: Joi.string().required(),
+    Category: Joi.string().required(),
+    Details: Joi.string()  
+})
+
+const checkValidation = (input) => {
+    const { error } = userSchema.validate(input)
+    if (error) {
+        return false
+    }
+    else {
+        return true
+    }
+}
 
 router.get('/', async (req, res) => {
     try{
@@ -14,7 +32,9 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/add-weirdy', async (req, res) => {
-    console.log(req.body)
+    if(!checkValidation(req.body)){
+        return res.status(400).json({"Error" : "Data validation failed. Please add data as per the norms"})
+    }
     const newWeirdy = new Weirdy(req.body)
     try {
         const savedWeird = await newWeirdy.save()
@@ -60,6 +80,28 @@ router.delete('/:id', async (req, res) => {
         res.status(500).send('Error: ' + err);
     }
 });
+
+router.post('/register', async (req, res) => {
+    const findUser = await user.findOne({ mail: req.body.mail })
+    if (findUser) {
+        return res.status(409).json({ Error: "User already exists" })
+    }
+    const newUser = new user({
+        fname: req.body.fname,
+        lname: req.body.lname,
+        mail: req.body.mail,
+        password: req.body.password,
+    })
+    try {
+        const savedUser = await newUser.save()
+        res.status(201).json({ savedUser })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json({ error: "Error adding the new user. Try again later" })
+    }
+})
+
 connectDB()
 
 module.exports = router

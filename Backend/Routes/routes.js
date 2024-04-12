@@ -3,6 +3,7 @@ const router = express.Router();
 const { connectDB } = require('../db.js')
 const Country = require('../Schemas/schema.js')
 
+
 router.get('/', async (req, res) => {
     try {
         const countries = await Country.find()

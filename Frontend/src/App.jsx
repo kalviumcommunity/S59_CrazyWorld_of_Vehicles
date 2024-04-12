@@ -2,7 +2,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import Weirdies from "./components/Weirdies";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom"
 import AddVehicle from "./components/AddVehicle";
 function App() {
   return (
@@ -13,7 +13,6 @@ function App() {
         <Route path="/Weirdies" element={<Weirdies />} />
         <Route path="/AddVehicle" element={<AddVehicle />} />
         <Route path="/editVehicle" element={<editVehicle />} />
-
       </Routes>
     </>
   );
