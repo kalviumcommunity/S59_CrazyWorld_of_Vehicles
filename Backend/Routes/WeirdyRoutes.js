@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const { connectDB } = require('../db.js')
 const Joi = require('joi')
+const jwt = require('jsonwebtoken')
 const Weirdy = require('../Schemas/WeirdiesSchema.js')
 const user = require('../Schemas/UserSchema.js')
 
@@ -54,7 +55,8 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     const findUser = await user.findOne({ mail: req.body.mail })
     if (findUser) {
-        return res.json({ Message: "Login Successful!", Name: findUser.fname })
+        const token = jwt.sign({userId : findUser._id}, SECRET, {expiresIn : '6h'})
+        return res.json({ Message: "Login Successful!", Name: findUser.fname, accessToken : token })
     }
     else {
         return res.status(401).json({ Error: "Login Failed!" })

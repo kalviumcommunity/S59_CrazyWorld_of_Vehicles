@@ -2,11 +2,10 @@ import { useState, useEffect } from "react"
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-function Login() {
+function SignIn() {
     const { register, handleSubmit } = useForm()
     const [resp, setResp] = useState(null)
     const [loggedIn, setLoggedIn] = useState(false)
-
     const authUser = async (data) => {
         try {
             const response = await fetch("http://localhost:8081/api/login", {
@@ -18,9 +17,18 @@ function Login() {
             const responseText = await response.json();
             if (response.ok) {
                 console.log("Login Successful");
+                const accessToken = responseText.accessToken
+                console.log(accessToken)
                 setResp(responseText);
-                setLoggedIn(true);
-                document.cookie = `user=${responseText.Name}; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/;`;
+                if (accessToken) {
+                    setLoggedIn(true);
+                    document.cookie = `user=${responseText.Name}; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/;`;
+                    document.cookie = `accessToken=${responseText.accessToken}; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/;`;
+
+                }
+                else{
+                    console.log("Authentication failed")
+                }
             } else {
                 console.log("Login Failed");
             }
@@ -44,6 +52,7 @@ function Login() {
                 setResp(responseText);
                 setLoggedIn(false);
                 document.cookie = `user=; expires=Thu, 10 Jan 1950 00:00:00 GMT; path=/;`;
+                document.cookie = `accessToken=; expires=Fri, 01 Jan 1970 23:59:59 GMT; path=/;`;
             } else {
                 console.log("Logout failed");
             }
@@ -106,14 +115,16 @@ function Login() {
                 </div>}
             </form>
             {loggedIn && <div className="flex justify-center">{
+                <Link to="/">
                 <button
                     onClick={logout}
                     className="bg-blue-500 rounded px-3 py-1.5 text-white hover:bg-blue-700">
                     Log Out
-                </button>}</div>}
+                </button>
+                </Link>}</div>}
 
         </>
     )
 }
 
-export default Login
+export default SignIn
