@@ -22,8 +22,9 @@ export default function Navbar() {
 
           
             <div className="cursor-pointer">
-             
+             <Link to="/SignUp">
                 <button>Sign-Up</button>
+             </Link>
                 
         </div>
         </div>
