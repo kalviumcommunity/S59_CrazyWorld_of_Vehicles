@@ -3,6 +3,7 @@ const router = express.Router();
 const { connectDB } = require('../db.js')
 const Joi = require('joi')
 const Weirdy = require('../Schemas/WeirdiesSchema.js')
+const user = require('../Schemas/UserSchema.js')
 
 const userSchema = Joi.object({
     Name: Joi.string().required(),
@@ -10,9 +11,15 @@ const userSchema = Joi.object({
     Category: Joi.string().required(),
     Details: Joi.string()  
 })
+const validateRegister = Joi.object({
+    fname: Joi.string().required(),
+    lname: Joi.string(),
+    mail: Joi.string().required(),
+    password: Joi.string().required(),
+})
 
-const checkValidation = (input) => {
-    const { error } = userSchema.validate(input)
+const checkValidation = (input, schema) => {
+    const { error } = schema.validate(input)
     if (error) {
         return false
     }
@@ -20,6 +27,43 @@ const checkValidation = (input) => {
         return true
     }
 }
+
+router.post('/register', async (req, res) => {
+    const findUser = await user.findOne({ mail: req.body.mail })
+    if (findUser) {
+        return res.status(409).json({ Error: "User already exists" })
+    }
+    if (!checkValidation(req.body, validateRegister)) {
+        return res.status(400).json({ "Error": "Data validation failed. Please add data as per the norms" })
+    }
+    const newUser = new user({
+        fname: req.body.fname,
+        lname: req.body.lname,
+        mail: req.body.mail,
+        password: req.body.password,
+    })
+    try {
+        const savedUser = await newUser.save()
+        res.status(201).json({ savedUser })
+    }
+    catch (err) {
+        res.status(500).json({ error: "An error occurred" })
+    }
+})
+
+router.post('/login', async (req, res) => {
+    const findUser = await user.findOne({ mail: req.body.mail })
+    if (findUser) {
+        return res.json({ Message: "Login Successful!", Name: findUser.fname })
+    }
+    else {
+        return res.status(401).json({ Error: "Login Failed!" })
+    }
+})
+
+router.post('/logout', async (req, res) => {
+    return res.json({ Message: "Logout successfull!" })
+})
 
 router.get('/', async (req, res) => {
     try{
@@ -32,7 +76,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/add-weirdy', async (req, res) => {
-    if(!checkValidation(req.body)){
+    if(!checkValidation(req.body, userSchema)){
         return res.status(400).json({"Error" : "Data validation failed. Please add data as per the norms"})
     }
     const newWeirdy = new Weirdy(req.body)
@@ -80,27 +124,6 @@ router.delete('/:id', async (req, res) => {
         res.status(500).send('Error: ' + err);
     }
 });
-
-router.post('/register', async (req, res) => {
-    const findUser = await user.findOne({ mail: req.body.mail })
-    if (findUser) {
-        return res.status(409).json({ Error: "User already exists" })
-    }
-    const newUser = new user({
-        fname: req.body.fname,
-        lname: req.body.lname,
-        mail: req.body.mail,
-        password: req.body.password,
-    })
-    try {
-        const savedUser = await newUser.save()
-        res.status(201).json({ savedUser })
-    }
-    catch (err) {
-        console.log(err)
-        res.status(500).json({ error: "Error adding the new user. Try again later" })
-    }
-})
 
 connectDB()
 
