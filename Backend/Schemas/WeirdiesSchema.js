@@ -1,21 +1,24 @@
 const mongoose = require('mongoose')
 
 const weirdy = new mongoose.Schema({
-    ImgURL: {
+    imgURL: {
         type: String,
         required: true
     },
-    Name: {
+    name: {
         type: String,
         required: true
     },
-    Category: {
+    category: {
         type: String,
         required : true
     },
-    Details: {
+    details: {
         type: String,
         required: false
+    },
+    userName : {
+        type : String,
     }
 })
 

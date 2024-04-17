@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 export default function AddVehicle() {
-  const [Name, setName] = useState("");
-  const [ImgURL, setImgURL] = useState("");
-  const [Category, setCategory] = useState("");
-  const [Details, setDetails] = useState("");
+  const [name, setName] = useState("");
+  const [imgURL, setImgURL] = useState("");
+  const [category, setCategory] = useState("");
+  const [details, setDetails] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -29,7 +29,7 @@ export default function AddVehicle() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ Name: Name, ImgURL: ImgURL, Category: Category })
+        body: JSON.stringify({ name: name, imgURL: imgURL, category: category })
       });
 
       if (response.ok) {
@@ -45,15 +45,15 @@ export default function AddVehicle() {
     <div className="w-[30vw] mx-auto bg-white rounded-lg shadow-md p-8 mt-10 flex flex-col justify-center place-items-center">
       <h2 className="text-2xl font-bold mb-6">Add a Weirdy Vehicle</h2>
       <input
-        value={Name}
+        value={name}
         onChange={handleNameChange}
         type="text"
         className="input-field"
-        placeholder="Enter Vehicle Name"
+        placeholder="Enter Vehicle name"
       />
       <br/>
       <input
-        value={ImgURL}
+        value={imgURL}
         onChange={handleImgURLChange}
         type="text"
         className="input-field"
@@ -61,18 +61,18 @@ export default function AddVehicle() {
       />
       <br/>
       <input
-        value={Category}
+        value={category}
         onChange={handleCategoryChange}
         type="text"
         className="input-field"
-        placeholder="Enter Category"
+        placeholder="Enter category"
       />
       <br/>
       <textarea
-        value={Details}
+        value={details}
         onChange={handleDetailsChange}
         className="input-field h-24 resize-none"
-        placeholder="Enter Details"
+        placeholder="Enter details"
       ></textarea>
       <br/>
       <div className="text-center mt-6">

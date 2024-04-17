@@ -19,8 +19,6 @@ export default function Navbar() {
           </Link>
 
           <div className="mr-3 cursor-pointer">About us</div>
-
-          
             <div className="cursor-pointer">
              <Link to="/SignUp">
                 <button>Sign-Up</button>
