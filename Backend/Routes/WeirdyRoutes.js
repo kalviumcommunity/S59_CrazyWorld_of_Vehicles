@@ -5,7 +5,7 @@ const Joi = require('joi')
 const jwt = require('jsonwebtoken')
 const Weirdy = require('../Schemas/WeirdiesSchema.js')
 const user = require('../Schemas/UserSchema.js')
-
+const SECRET = process.env.SECRET
 const userSchema = Joi.object({
     Name: Joi.string().required(),
     ImgURL: Joi.string().required(),
