@@ -12,7 +12,7 @@ function UpdateProduct() {
   const [responseText, setRes] = useState("");
 
   const fetchData = (name) => {
-    fetch(`https://onlinegoessilly-server.onrender.com/api/user-items/${name}`)
+    fetch(`http://localhost:8081/api/user-vehicle/${name}`)
         .then(resp => resp.json())
         .then(result => setData(result))
         .catch((err) => console.log(err));
