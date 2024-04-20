@@ -11,7 +11,8 @@ const userSchema = Joi.object({
     name: Joi.string().required(),
     imgURL: Joi.string().required(),
     category: Joi.string().required(),
-    details: Joi.string()  
+    details: Joi.string(),
+    userName : Joi.string().required()  
 })
 const validateRegister = Joi.object({
     fname: Joi.string().required(),
@@ -80,7 +81,7 @@ router.get('/', async (req, res) => {
 
 router.get('/user-vehicle/', async (req, res) => {
     try {
-        const uservehicles = await userVehicle.find()
+        const uservehicles = await Weirdy.find()
         res.json(uservehicles)
     }
     catch (err) {
@@ -110,6 +111,7 @@ router.post('/add-weirdy', async (req, res) => {
         res.json(savedWeird)
     }
     catch (err) {
+        console.log(err)
         res.json({ err })
     }
 })

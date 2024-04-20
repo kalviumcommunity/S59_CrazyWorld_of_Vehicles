@@ -58,7 +58,7 @@ function Page() {
         </div>
       </div>
       
-      {/* <FilterVehicles /> */}
+      <FilterVehicles />
     </div>
   );
 }

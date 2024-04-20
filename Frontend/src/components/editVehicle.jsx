@@ -87,7 +87,7 @@ function EditVehicle() {
           />
           <button
             type="submit"
-            className="bg-pink-700 rounded px-3 py-1.5 text-white hover:bg-pink-600"
+            className="bg-blue-500 rounded px-3 py-1.5 text-white hover:bg-blue-700"
           >
             Commit Changes
           </button>
