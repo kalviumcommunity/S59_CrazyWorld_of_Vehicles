@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FilterVehicles from "../components/FilterVehicles"
 
 function Page() {
   const [data, setData] = useState([]);
@@ -48,14 +49,16 @@ function Page() {
             >
               <img
                 className="h-[50vh] object-cover"
-                src={wierdy.ImgURL}
-                alt={wierdy.Name}
+                src={wierdy.imgURL}
+                alt={wierdy.name}
               />
-              <p className="text-2xl text-black mt-[62vh] absolute w-[15vw]">{wierdy.Name}</p>
+              <p className="text-2xl text-black mt-[62vh] absolute w-[15vw]">{wierdy.name}</p>
             </div>
           ))}
         </div>
       </div>
+      
+      <FilterVehicles />
     </div>
   );
 }

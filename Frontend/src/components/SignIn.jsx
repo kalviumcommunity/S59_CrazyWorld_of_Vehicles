@@ -22,7 +22,7 @@ function SignIn() {
                 setResp(responseText);
                 if (accessToken) {
                     setLoggedIn(true);
-                    document.cookie = `user=${responseText.Name}; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/;`;
+                    document.cookie = `user=${responseText.name}; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/;`;
                     document.cookie = `accessToken=${responseText.accessToken}; expires=Fri, 31 Dec 2024 23:59:59 GMT; path=/;`;
 
                 }
@@ -60,8 +60,6 @@ function SignIn() {
             console.log(err);
         }
     };
-
-
     useEffect(() => {
         console.log(resp)
     }, [resp])
@@ -73,7 +71,6 @@ function SignIn() {
             console.log(err);
         }
     };
-
     return (
         <>
             <form

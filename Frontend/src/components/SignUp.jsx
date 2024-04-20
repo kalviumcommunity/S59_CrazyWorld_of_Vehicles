@@ -18,7 +18,7 @@ function SignUp() {
 
   const registerUser = async (data) => {
     try {
-      const response = await fetch("https://localhost:8081/api/register", {
+      const response = await fetch("http://localhost:8081/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fname: data.fname, lname: data.lname, mail: data.mail, password: data.password })
@@ -98,11 +98,11 @@ function SignUp() {
           <Link to="/SignIn">
           <button className="bg-slate-100 rounded px-3 py-1.5 text-slate-600 mr-3 ">I already have an account</button>
           </Link>
-          {/* <Link to="/"> */}
+          <Link to="/">
           <button type="submit" className="bg-blue-500 rounded px-3 py-1.5 text-white hover:bg-blue-700">
             Create Account
           </button>
-          {/* </Link> */}
+          </Link>
         </div>
       </form>
 

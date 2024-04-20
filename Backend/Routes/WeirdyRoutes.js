@@ -5,12 +5,14 @@ const Joi = require('joi')
 const jwt = require('jsonwebtoken')
 const Weirdy = require('../Schemas/WeirdiesSchema.js')
 const user = require('../Schemas/UserSchema.js')
+const SECRET = process.env.SECRET
 
 const userSchema = Joi.object({
-    Name: Joi.string().required(),
-    ImgURL: Joi.string().required(),
-    Category: Joi.string().required(),
-    Details: Joi.string()  
+    name: Joi.string().required(),
+    imgURL: Joi.string().required(),
+    category: Joi.string().required(),
+    details: Joi.string(),
+    userName : Joi.string().required()  
 })
 const validateRegister = Joi.object({
     fname: Joi.string().required(),
@@ -56,10 +58,10 @@ router.post('/login', async (req, res) => {
     const findUser = await user.findOne({ mail: req.body.mail })
     if (findUser) {
         const token = jwt.sign({userId : findUser._id}, SECRET, {expiresIn : '6h'})
-        return res.json({ Message: "Login Successful!", Name: findUser.fname, accessToken : token })
+        return res.json({ Message: "Login Successful!", name: findUser.fname, accessToken : token })
     }
     else {
-        return res.status(401).json({ Error: "Login Failed!" })
+        return res.status(401).json({ Error: "Login Failed!", err })
     }
 })
 
@@ -77,6 +79,28 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/user-vehicle/', async (req, res) => {
+    try {
+        const uservehicles = await Weirdy.find()
+        res.json(uservehicles)
+    }
+    catch (err) {
+        res.status(500).json({ error: "Failed fetching the vehicle" })
+    }
+});
+
+
+router.get('/users', async (req, res) => {
+    try {
+        const users = await user.find();
+        const usernames = users.map(user => user.fname)
+        res.json(usernames);
+    } catch(err) {
+        res.status(500).json({ error: "No user found" });
+    }
+});
+
+
 router.post('/add-weirdy', async (req, res) => {
     if(!checkValidation(req.body, userSchema)){
         return res.status(400).json({"Error" : "Data validation failed. Please add data as per the norms"})
@@ -87,6 +111,7 @@ router.post('/add-weirdy', async (req, res) => {
         res.json(savedWeird)
     }
     catch (err) {
+        console.log(err)
         res.json({ err })
     }
 })
