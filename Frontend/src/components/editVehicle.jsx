@@ -93,7 +93,6 @@ function EditVehicle() {
           </button>
         </form>
       )}
-      {/* {responseText && <div>{responseText}</div>} */}
     </div>
   );
 }

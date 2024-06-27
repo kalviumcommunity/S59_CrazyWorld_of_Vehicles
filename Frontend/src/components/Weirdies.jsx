@@ -15,7 +15,7 @@ export default function Weirdies() {
       });
   };
 
-  const handlDelete = (id) => {
+  const handleDelete = (id) => {
     fetch(`http://localhost:8081/api/${id}` , {
       method: "DELETE", 
     }) 
@@ -55,7 +55,7 @@ export default function Weirdies() {
                 <Link to={`/EditVehicle/${vehicle._id}`}>
                   <button>Edit</button>
                 </Link>
-                <button onClick={() => handlDelete(vehicle._id)}>Delete</button>
+                <button onClick={() => handleDelete(vehicle._id)}>Delete</button>
               </div>
             </div>
             <p className="text-gray-600">{vehicle.category}</p>
