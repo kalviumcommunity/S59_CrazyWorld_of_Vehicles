@@ -140,6 +140,17 @@ router.put('/update-vehicle/:id', async (req, res) => {
     }
 });
 
+router.get('/single-user-vehicle/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        const uservehicles = await Weirdy.findById(id)
+        res.json(uservehicles)
+    }
+    catch (err) {
+        res.status(500).json({ error: "Failed fetching the vehicle" })
+    }
+});
+
 router.delete('/:id', async (req, res) => {
     try {
         const foundWeirdy = await Weirdy.findByIdAndDelete(req.params.id);

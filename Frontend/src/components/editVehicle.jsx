@@ -1,3 +1,5 @@
+EditVehicle.jsx
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -8,9 +10,9 @@ function EditVehicle() {
   const [categoryInput, setCategoryInput] = useState("");
   const [imgURLInput, setImgURLInput] = useState("");
   const [responseText, setResponseText] = useState("");
-
+  const { id } = useParams()
   const fetchData = () => {
-    fetch(`http://localhost:8081/api/user-vehicle/${name}`)
+    fetch(`http://localhost:8081/api/single-user-vehicle/${id}`)
       .then(resp => resp.json())
       .then(result => setData(result))
       .catch((err) => console.log(err));
@@ -20,7 +22,7 @@ function EditVehicle() {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8081/api/update-vehicle/${data.id}`,
+        `http://localhost:8081/api/update-vehicle/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -45,12 +47,12 @@ function EditVehicle() {
 
   useEffect(() => {
     fetchData();
-  }, [name]); 
+  }, [name]);
   return (
     <div>
       {data && (
         <form
-          onSubmit={updateData}
+          onSubmit={(e) => updateData(e)}
           className="flex justify-center flex-col items-center shadow-xl w-[40vw] m-auto px-5 my-12 py-10 pb-15 rounded"
         >
           <img
@@ -93,7 +95,7 @@ function EditVehicle() {
           </button>
         </form>
       )}
-      {responseText && <div>{responseText}</div>}
+      {/* {responseText && <div>{responseText}</div>} */}
     </div>
   );
 }
