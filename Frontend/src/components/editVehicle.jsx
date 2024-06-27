@@ -1,5 +1,3 @@
-EditVehicle.jsx
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -16,7 +14,7 @@ function EditVehicle() {
       .then(resp => resp.json())
       .then(result => setData(result))
       .catch((err) => console.log(err));
-  };
+  }
 
   const updateData = async (e) => {
     e.preventDefault();
